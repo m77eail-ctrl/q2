@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>منصة تقنية وأناقة للتعليم</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5f1;--sf:#fff;--tx:#1d2330;--mu:#667085;--ac:#0f766e;--ac2:#b45309;--bd:#e3e0d8;--ok:#15803d;--bad:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161d;--sf:#1a2029;--tx:#e8ebf0;--mu:#98a2b3;--ac:#2dd4bf;--ac2:#fbbf24;--bd:#2a3340;--ok:#4ade80;--bad:#f87171}}
+:root[data-theme="dark"]{--bg:#12161d;--sf:#1a2029;--tx:#e8ebf0;--mu:#98a2b3;--ac:#2dd4bf;--ac2:#fbbf24;--bd:#2a3340;--ok:#4ade80;--bad:#f87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,"Segoe UI",sans-serif;line-height:1.7}
+header{padding:28px 16px 8px;text-align:center}
+h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem)}h1 span{color:var(--ac)}
+header p{margin:4px 0 0;color:var(--mu)}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:12px}
+nav button,.btn{font:inherit;border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:7px 14px;border-radius:10px;cursor:pointer}
+nav button.on,.btn.pri{background:var(--ac);color:#fff;border-color:var(--ac)}
+.btn:hover{border-color:var(--ac)}
+main{max-width:1200px;margin:0 auto;padding:0 14px 40px}
+.pane{display:none}.pane.on{display:block}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:14px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:14px}
+.card h2,.card h3{margin:0 0 8px;font-size:1.1rem}
+.exl{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.exl button.done::after{content:" ✓";color:var(--ok)}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+#ed{height:300px;border-radius:10px;border:1px solid var(--bd);direction:ltr;font-size:14px}
+iframe{width:100%;height:260px;border:1px solid var(--bd);border-radius:10px;background:#fff}
+.tabs{display:flex;gap:6px;margin-bottom:6px}.tabs button.on{background:var(--ac2);color:#fff;border-color:var(--ac2)}
+#res li{list-style:none}#res{padding:0;margin:6px 0}.p::before{content:"✔ ";color:var(--ok)}.f::before{content:"✘ ";color:var(--bad)}
+#con{background:#0001;border-radius:8px;padding:6px 10px;font:12px monospace;direction:ltr;min-height:28px;white-space:pre-wrap}
+label{display:block;font-size:.9rem;color:var(--mu);margin-top:8px}
+input,select,textarea{width:100%;font:inherit;padding:7px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx)}
+textarea{min-height:70px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+pre.out{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--bd);border-radius:10px;padding:10px;direction:ltr;text-align:left;min-height:60px}
+canvas{max-width:100%;border-radius:10px;border:1px solid var(--bd)}
+.warn{color:var(--bad);min-height:1.5em}.ok{color:var(--ok)}
+ol,ul.t{padding-inline-start:20px;margin:6px 0}details{margin:6px 0}summary{cursor:pointer;font-weight:700}
+</style></head><body>
+<header><h1>منصة <span>تقنية وأناقة</span> للتعليم</h1><p>تعلّم HTML وCSS وJavaScript بالتجربة المباشرة، دون تثبيت أي برنامج</p></header>
+<nav id="nav"><button class="on" data-p="ex">لوحة التمارين</button><button data-p="img">مولّد أوامر الصور</button><button data-p="pr">صياغة الأوامر</button></nav>
+<main>
+<section class="pane on" id="ex">
+ <div class="exl" id="exl"></div>
+ <div class="grid">
+  <div>
+   <div class="card"><h2 id="et"></h2><p id="ed2"></p>
+    <h3>كيف تعمل؟</h3><ol><li>اقرأ المطلوب أعلاه.</li><li>عدّل الكود في التبويبات HTML وCSS وJS.</li><li>اضغط «تشغيل» وراقب المعاينة.</li><li>اضغط «فحص الحل» وافحص النتائج.</li></ol></div>
+   <div class="card"><h3>تلميحات خطوة بخطوة</h3><ol id="hl"></ol><button class="btn" id="hb">أظهر التلميح التالي</button></div>
+   <div class="card"><h3>نتائج الفحص</h3><ul id="res"><li style="color:var(--mu)">لم يتم الفحص بعد.</li></ul></div>
+  </div>
+  <div>
+   <div class="card">
+    <div class="tabs" id="tabs"><button class="btn on" data-t="html">HTML</button><button class="btn" data-t="css">CSS</button><button class="btn" data-t="js">JS</button></div>
+    <div id="ed"></div>
+    <div class="bar"><button class="btn pri" id="run">▶ تشغيل</button><button class="btn" id="chk">✔ فحص الحل</button><button class="btn" id="rst">↺ إعادة تعيين</button><button class="btn" id="sv">💾 حفظ التقدم</button><button class="btn" id="imp">📂 استيراد نموذج</button><input type="file" id="fi" accept=".html,.css,.js,.txt" hidden></div>
+    <div id="msg" class="ok"></div>
+   </div>
+   <div class="card"><h3>المعاينة الفورية</h3><iframe id="fr" sandbox="allow-scripts" title="معاينة"></iframe><h3 style="margin-top:8px">وحدة التحكم</h3><div id="con"></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="pane" id="img">
+ <div class="grid">
+  <div class="card"><h2>مولّد أوامر الصور</h2>
+   <div class="row"><div><label>النموذج</label><select id="m"><option value="sdxl">Stable Diffusion XL</option><option value="flux">Flux</option><option value="mj">Midjourney</option><option value="dalle">DALL·E</option></select></div>
+   <div><label>النمط</label><select id="st"><option value="cinematic photorealistic, soft lighting">سينمائي واقعي</option><option value="3D render, octane, studio light">ثلاثي الأبعاد</option><option value="watercolor painting, pastel tones">ألوان مائية</option><option value="flat digital illustration, clean vector">رسم رقمي</option><option value="anime style, vivid colors">أنمي</option></select></div></div>
+   <div class="row"><div><label>الدقة</label><select id="rs"><option>1024x1024</option><option>768x512</option><option>512x512</option><option>1344x768</option></select></div>
+   <div><label>Seed</label><div style="display:flex;gap:6px"><input id="sd" type="number" value="1234"><button class="btn" id="rn">🎲</button></div></div></div>
+   <label>وصف الموضوع</label><textarea id="sj" placeholder="مثال: مكتب مطوّر عصري عند الغروب"></textarea>
+   <label>الأمر السلبي (ما لا تريده)</label><textarea id="ng" placeholder="blurry, low quality, watermark">blurry, low quality, watermark</textarea>
+   <div class="bar"><button class="btn pri" id="gi">توليد الأمر</button><button class="btn pri" id="ai">🎨 توليد صورة بـ Claude</button><button class="btn" id="en">✨ تحسين الوصف</button><button class="btn" id="ex1">مثال 1</button><button class="btn" id="ex2">مثال 2</button></div>
+   <div class="warn" id="iw"></div>
+   <details><summary>إرشادات سريعة</summary><ul class="t"><li>ابدأ بالموضوع ثم النمط ثم الإضاءة والتفاصيل.</li><li>ثبّت الـ Seed لتكرار النتيجة نفسها.</li><li>استخدم الأمر السلبي لاستبعاد العيوب.</li></ul></details>
+  </div>
+  <div class="card"><h3>الأمر الناتج</h3><pre class="out" id="io">—</pre>
+   <h3>معاينة تركيبية</h3><canvas id="cv" width="360" height="360"></canvas>
+   <div class="bar"><button class="btn" id="dt">تنزيل TXT</button><button class="btn" id="dj">تنزيل JSON</button><button class="btn" id="dp">تنزيل PNG</button><button class="btn" id="ds">تنزيل SVG</button><button class="btn" id="ci">نسخ</button></div>
+   <div id="im" class="ok"></div></div>
+ </div>
+</section>
+
+<section class="pane" id="pr">
+ <div class="grid">
+  <div class="card"><h2>أداة صياغة الأوامر</h2>
+   <label>القالب</label><select id="tp"><option value="0">شرح مفهوم لمبتدئ</option><option value="1">وصف منتج تسويقي</option><option value="2">مراجعة كود</option><option value="3">صفحة شخصية HTML/CSS</option></select>
+   <label>الدور</label><input id="ro" value="معلّم صبور">
+   <label>المهمة</label><textarea id="ta"></textarea>
+   <label>السياق</label><textarea id="cx"></textarea>
+   <label>الصيغة المطلوبة</label><input id="fm" value="خطوات مرقّمة وأمثلة قصيرة">
+   <div class="bar"><button class="btn pri" id="gp">صياغة</button></div><div class="warn" id="pw"></div>
+  </div>
+  <div class="card"><h3>الأمر الجاهز</h3><pre class="out" id="po" style="direction:rtl;text-align:right">—</pre>
+   <div class="bar"><button class="btn" id="cp">نسخ</button><button class="btn" id="sh">مشاركة</button></div><div id="pm" class="ok"></div>
+   <h3>نصائح للمبتدئين</h3><ul class="t"><li>حدّد الدور: «أنت مصمم واجهات».</li><li>اذكر المهمة بفعل واضح ونتيجة محددة.</li><li>أعطِ سياقًا: الجمهور، اللغة، القيود.</li><li>اطلب صيغة المخرجات: جدول، قائمة، كود.</li><li>جرّب وعدّل الأمر على دفعات صغيرة.</li><li>للصفحات: اطلب «HTML وCSS في ملف واحد مع تعليقات».</li></ul></div>
+ </div>
+</section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/ace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.9/mode-javascript.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const BAD=/(قنبلة|متفجر|سلاح|اختراق حساب|برمجية خبيثة|فيروس|سرقة|انتحار|إباحي|عنف مفرط|bomb|malware|ransomware|porn|nsfw|gore|suicide|weapon|child\s*abuse)/i;
+$$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));$$('.pane').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p));if(b.dataset.p==='ex')ed.resize()});
+/* ===== التمارين ===== */
+const EX=[
+{t:'1) بطاقة تعريفية',d:'ضع اسمك في h1 داخل العنصر .card، وأضف فقرة p عن اهتماماتك، ثم لوّن العنوان من CSS.',
+h:['ابحث عن التعليق TODO في HTML.','اكتب اسمك بين وسمي h1 ثم أضف <p>نصك</p>.','في تبويب CSS اكتب color للعنوان h1 بلون غير الأسود.','شغّل ثم افحص الحل.'],
+c:{html:'<div class="card">\n  <h1></h1>\n  <!-- TODO: اكتب اسمك وأضف فقرة p -->\n</div>',css:'body{font-family:sans-serif;background:#f4f4f4;display:grid;place-items:center;min-height:90vh;margin:0}\n.card{background:#fff;padding:24px;border-radius:16px;box-shadow:0 4px 16px #0002}\n/* TODO: لوّن h1 */\nh1{}',js:''},
+k:[['العنصر .card موجود','document.querySelector(".card")'],['h1 يحتوي نصًا','document.querySelector("h1").textContent.trim().length>1'],['توجد فقرة p بنص','document.querySelector("p").textContent.trim().length>1'],['لون h1 ليس الأسود','getComputedStyle(document.querySelector("h1")).color!=="rgb(0, 0, 0)"']]},
+{t:'2) زر تفاعلي',d:'اجعل الزر #btn يكتب رسالة ترحيب داخل الفقرة #out عند النقر عليه.',
+h:['الزر والفقرة جاهزان في HTML.','في JS استخدم btn.addEventListener("click", ...).','داخل الدالة اكتب out.textContent = "مرحبًا!".','شغّل واضغط الزر ثم افحص الحل.'],
+c:{html:'<button id="btn">اضغط هنا</button>\n<p id="out"></p>',css:'body{font-family:sans-serif;padding:20px}\nbutton{padding:8px 16px;border-radius:8px}',js:'const btn=document.getElementById("btn");\nconst out=document.getElementById("out");\n// TODO: أضف مستمع حدث النقر\n'},
+k:[['الزر #btn موجود','document.getElementById("btn")'],['لا توجد أخطاء JS','!window.__err'],['النقر يكتب نصًا في #out','(function(){document.getElementById("btn").click();return document.getElementById("out").textContent.trim().length>0})()']]},
+{t:'3) قائمة مهارات',d:'أنشئ قائمة ul تضم 3 مهارات على الأقل (li) واعرضها أفقيًا باستخدام flex.',
+h:['أضف عناصر li داخل ul.','في CSS اكتب display:flex للقائمة ul.','أضف gap:12px لتباعد أنيق.','شغّل ثم افحص الحل.'],
+c:{html:'<ul>\n  <li>HTML</li>\n  <!-- TODO: أضف مهارتين أخريين -->\n</ul>',css:'body{font-family:sans-serif;padding:20px}\nul{list-style:none;padding:0}\nli{background:#0f766e;color:#fff;padding:6px 14px;border-radius:20px}\n/* TODO: اجعل ul مرنة */',js:''},
+k:[['3 عناصر li على الأقل','document.querySelectorAll("ul li").length>=3'],['ul تستخدم flex أو grid','/flex|grid/.test(getComputedStyle(document.querySelector("ul")).display)'],['تباعد gap مضبوط','getComputedStyle(document.querySelector("ul")).columnGap!=="normal"']]},
+{t:'4) صفحتي الشخصية',d:'أكمل القالب لبناء صفحة شخصية: اسمك، نبذة، 3 مهارات، ورابط تواصل.',
+h:['غيّر الاسم والنبذة في القالب.','أضف مهارات في القائمة ul.','أضف رابطًا a مع href صحيح.','لوّن الخلفية أو الخط من CSS ثم افحص.'],
+c:{html:'<main>\n  <h1>اسمي</h1>\n  <p>نبذة قصيرة عني...</p>\n  <ul><li>مهارة 1</li></ul>\n  <a href="#">تواصل معي</a>\n</main>',css:'body{font-family:sans-serif;background:#fffaf0;margin:0}\nmain{max-width:480px;margin:30px auto;padding:20px;background:#fff;border-radius:16px}\na{color:#0f766e}',js:''},
+k:[['الاسم ليس «اسمي»','document.querySelector("h1").textContent.trim()!=="اسمي"&&document.querySelector("h1").textContent.trim().length>1'],['3 مهارات على الأقل','document.querySelectorAll("li").length>=3'],['رابط a مع href','document.querySelector("a")&&document.querySelector("a").getAttribute("href")!=="#"'],['لون خلفية الصفحة مخصص','getComputedStyle(document.body).backgroundColor!=="rgba(0, 0, 0, 0)"']]}
+];
+let cur=0,tab='html',shown=0,quiet=false,code=[],done=[];
+const fresh=i=>JSON.parse(JSON.stringify(EX[i].c));
+EX.forEach((e,i)=>code[i]=fresh(i));
+try{const s=JSON.parse(localStorage.getItem('tt-edu')||'null');if(s){s.code.forEach((c,i)=>{if(c)code[i]=c});done=s.done||[]}}catch(e){}
+const ed=ace.edit('ed');ed.setOptions({fontSize:14,showPrintMargin:false,useWorker:false,wrap:true,tabSize:2});
+ed.setTheme(matchMedia('(prefers-color-scheme: dark)').matches?'ace/theme/textmate':'ace/theme/textmate');
+const modes={html:'ace/mode/html',css:'ace/mode/css',js:'ace/mode/javascript'};
+function load(){quiet=true;ed.session.setMode(modes[tab]);ed.setValue(code[cur][tab],-1);quiet=false}
+let tmr;ed.on('change',()=>{if(quiet)return;code[cur][tab]=ed.getValue();clearTimeout(tmr);tmr=setTimeout(()=>run(false),700)});
+function menu(){$('#exl').innerHTML='';EX.forEach((e,i)=>{const b=document.createElement('button');b.className='btn'+(i===cur?' pri':'')+(done[i]?' done':'');b.textContent=e.t;b.onclick=()=>{cur=i;sel()};$('#exl').append(b)})}
+function sel(){shown=0;$('#et').textContent=EX[cur].t;$('#ed2').textContent=EX[cur].d;$('#hl').innerHTML='';$('#hb').disabled=false;$('#res').innerHTML='<li style="color:var(--mu)">لم يتم الفحص بعد.</li>';$('#con').textContent='';menu();load();run(false)}
+$('#hb').onclick=()=>{const h=EX[cur].h;if(shown<h.length){const li=document.createElement('li');li.textContent=h[shown++];$('#hl').append(li)}if(shown>=h.length)$('#hb').disabled=true};
+$$('#tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;$$('#tabs button').forEach(x=>x.classList.toggle('on',x===b));load()});
+function build(check){const c=code[cur];
+ const js=c.js.replace(/<\/script/gi,'<\\/script');
+ const T=check?'<script>setTimeout(function(){var r=[];'+EX[cur].k.map(x=>'try{r.push(!!('+x[1]+'))}catch(e){r.push(false)}').join('')+'parent.postMessage({k:"t",r:r},"*")},60)<\/script>':'';
+ return '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data:"><style>'+c.css+'</style></head><body>'+c.html+'<script>window.__err=0;onerror=function(m){__err=1;parent.postMessage({k:"e",m:String(m)},"*")};console.log=function(){parent.postMessage({k:"l",m:[].join.call(arguments," ")},"*")}<\/script><script>'+js+'<\/script>'+T+'</body></html>'}
+function run(check){$('#con').textContent='';$('#fr').srcdoc=build(check)}
+addEventListener('message',e=>{if(e.source!==$('#fr').contentWindow)return;const d=e.data||{};
+ if(d.k==='l'||d.k==='e'){$('#con').textContent+=(d.k==='e'?'خطأ: ':'')+String(d.m).slice(0,300)+'\n'}
+ if(d.k==='t'&&Array.isArray(d.r)){$('#res').innerHTML='';EX[cur].k.forEach((t,i)=>{const li=document.createElement('li');li.className=d.r[i]?'p':'f';li.textContent=t[0];$('#res').append(li)});
+  const all=d.r.every(Boolean);$('#msg').textContent=all?'أحسنت! تم حل التمرين 🎉':'بقي بعض البنود، راجع التلميحات.';if(all){done[cur]=true;menu()}}});
+$('#run').onclick=()=>{$('#msg').textContent='';run(false)};
+$('#chk').onclick=()=>run(true);
+$('#rst').onclick=()=>{code[cur]=fresh(cur);load();run(false);$('#msg').textContent='تمت إعادة التمرين لحالته الأولى.'};
+$('#sv').onclick=()=>{try{localStorage.setItem('tt-edu',JSON.stringify({code,done}));$('#msg').textContent='تم حفظ تقدمك في هذا المتصفح.'}catch(e){$('#msg').textContent='تعذّر الحفظ في هذا المتصفح.'}};
+$('#imp').onclick=()=>$('#fi').click();
+$('#fi').onchange=e=>{const f=e.target.files[0];if(!f)return;if(f.size>200000){$('#msg').textContent='الملف كبير (الحد 200KB).';return}const r=new FileReader();r.onload=()=>{code[cur][tab]=String(r.result);load();run(false);$('#msg').textContent='تم استيراد الملف إلى تبويب '+tab.toUpperCase()};r.readAsText(f);e.target.value=''};
+sel();
+/* ===== أدوات مساعدة ===== */
+const copy=async t=>{try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}a.remove();return ok}};
+let DL=null;claude.use('downloads').then(d=>{DL=d;if(!d)['#dt','#dj','#dp'].forEach(s=>$(s).style.display='none')}).catch(()=>{DL=null;['#dt','#dj','#dp'].forEach(s=>$(s).style.display='none')});
+async function save(name,data){if(!DL)return;try{await DL.save({filename:name,data});$('#im').textContent='تم تجهيز الملف.'}catch(e){$('#im').textContent=e&&e.code==='declined'?'تم الإلغاء.':'تعذّر التنزيل.'}}
+/* ===== مولّد أوامر الصور ===== */
+const gcd=(a,b)=>b?gcd(b,a%b):a;let IMG=null;
+$('#rn').onclick=()=>{$('#sd').value=Math.floor(Math.random()*1e6)};
+$('#ex1').onclick=()=>{$('#sj').value='A cozy developer desk at sunset, laptop glowing, plants';$('#st').selectedIndex=0;gen()};
+$('#ex2').onclick=()=>{$('#sj').value='A friendly robot teacher in a bright classroom';$('#st').selectedIndex=3;gen()};
+function gen(){const s=$('#sj').value.trim(),n=$('#ng').value.trim();$('#iw').textContent='';
+ if(!s){$('#iw').textContent='اكتب وصف الموضوع أولًا.';return}
+ if(BAD.test(s+' '+n)){$('#iw').textContent='تم حظر المحتوى: الطلب يتضمن مادة ضارة أو غير لائقة.';$('#io').textContent='—';IMG=null;return}
+ const m=$('#m').value,[W,H]=$('#rs').value.split('x').map(Number),sd=$('#sd').value||0,g=gcd(W,H),st=$('#st').value;
+ let p=m==='mj'?`${s}, ${st}, highly detailed --ar ${W/g}:${H/g} --seed ${sd}${n?' --no '+n:''}`:`${s}, ${st}, highly detailed\nNegative prompt: ${n}\nSize: ${W}x${H}, Seed: ${sd}, Model: ${$('#m').selectedOptions[0].text}`;
+ IMG={prompt:p,model:m,style:st,width:W,height:H,seed:+sd,negative:n};$('#io').textContent=p;draw(W,H,+sd)}
+function draw(W,H,seed){const c=$('#cv'),x=c.getContext('2d');c.width=360;c.height=Math.round(360*H/W);let a=seed>>>0||1;const r=()=>{a=(a+0x6D2B79F5)>>>0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+ const h=r()*360,g=x.createLinearGradient(0,0,c.width,c.height);g.addColorStop(0,`hsl(${h},70%,25%)`);g.addColorStop(1,`hsl(${(h+60)%360},80%,60%)`);x.fillStyle=g;x.fillRect(0,0,c.width,c.height);
+ for(let i=0;i<14;i++){x.fillStyle=`hsla(${(h+r()*120)%360},80%,70%,${.12+r()*.25})`;x.beginPath();x.arc(r()*c.width,r()*c.height,20+r()*70,0,7);x.fill()}}
+$('#gi').onclick=gen;
+let SM=null,SVG='';
+const sm=async()=>{if(!SM)SM=await claude.use('sample').catch(()=>null);return SM};
+function cleanSvg(t,W,H){const m=String(t).match(/<svg[\s\S]*<\/svg>/i);if(!m)return'';let s=m[0];if(/<script|<foreignObject|<iframe|<image|\son\w+\s*=|javascript:|href\s*=\s*["']?(?!#)|url\(\s*["']?https?:/i.test(s))return'';if(!/xmlns=/.test(s))s=s.replace('<svg','<svg xmlns="http://www.w3.org/2000/svg"');if(!/<svg[^>]*\swidth=/i.test(s))s=s.replace('<svg','<svg width="'+W+'" height="'+H+'"');return s}
+const serr=e=>e&&e.code==='not_granted'?'لم تتم الموافقة على الاستخدام.':e&&e.code==='rate_limited'?'تجاوزت الحد المسموح، حاول لاحقًا.':'تعذّر التنفيذ، حاول مجددًا.';
+$('#ai').onclick=async()=>{gen();if(!IMG)return;const s=await sm();if(!s){$('#iw').textContent='ميزة التوليد غير متاحة في هذا العرض.';return}
+ $('#im').textContent='جارٍ توليد الصورة...';$('#ai').disabled=true;
+ try{const r=await s('أنت رسام SVG محترف. ارسم صورة تعبّر عن الوصف التالي بنمط '+IMG.style+'.\nالوصف: '+$('#sj').value+'\nتجنّب: '+IMG.negative+'\nالقيود: أعد عنصر svg واحدًا فقط بلا أي شرح أو علامات markdown، مع viewBox="0 0 '+IMG.width+' '+IMG.height+'"، بلا سكربتات ولا روابط خارجية ولا عنصر image، واستخدم تدرجات وأشكالًا غنية وتكوينًا متوازنًا، ولا تكتب نصوصًا داخل الصورة.',{cache:false,modelTier:'complex'});
+  SVG=cleanSvg(r.text,IMG.width,IMG.height);if(!SVG){$('#im').textContent='لم يُنتج النموذج صورة صالحة، حاول مجددًا.';return}
+  const img=new Image();img.onload=()=>{const c=$('#cv'),x=c.getContext('2d');c.width=Math.min(IMG.width,1024);c.height=Math.round(c.width*IMG.height/IMG.width);x.drawImage(img,0,0,c.width,c.height);$('#im').textContent='تم توليد الصورة.'};
+  img.onerror=()=>{$('#im').textContent='تعذّر عرض الصورة الناتجة.'};
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(SVG)}
+ catch(e){$('#im').textContent=serr(e)}finally{$('#ai').disabled=false}};
+$('#en').onclick=async()=>{const t=$('#sj').value.trim();if(!t)return;if(BAD.test(t)){$('#iw').textContent='تم حظر المحتوى: الطلب يتضمن مادة ضارة أو غير لائقة.';return}
+ const s=await sm();if(!s){$('#iw').textContent='ميزة التحسين غير متاحة في هذا العرض.';return}
+ $('#iw').textContent='';$('#en').disabled=true;
+ try{const r=await s('حسّن وصف الصورة التالي ليصبح أمرًا غنيًا بالتفاصيل (الإضاءة، التكوين، الألوان). أعد الأمر المحسّن بالإنجليزية في سطر واحد فقط بلا أي شرح:\n'+t,{cache:false,modelTier:'quick'});$('#sj').value=String(r.text).trim().slice(0,600);gen()}
+ catch(e){$('#iw').textContent=serr(e)}finally{$('#en').disabled=false}};
+$('#ds').onclick=()=>SVG&&save('image.svg',SVG);
+$('#ci').onclick=async()=>{if(!IMG)return;$('#im').textContent=await copy(IMG.prompt)?'تم النسخ.':'تعذّر النسخ.'};
+$('#dt').onclick=()=>IMG&&save('image-prompt.txt',IMG.prompt);
+$('#dj').onclick=()=>IMG&&save('image-prompt.json',JSON.stringify(IMG,null,2));
+$('#dp').onclick=()=>IMG&&$('#cv').toBlob(b=>b&&save('preview.png',b),'image/png');
+/* ===== صياغة الأوامر ===== */
+const TP=[['اشرح مفهومًا بلغة بسيطة','الطالب مبتدئ ولا يملك خلفية سابقة'],['اكتب وصفًا تسويقيًا لمنتج','الجمهور عملاء مهتمون بالأناقة والتقنية'],['راجع الكود التالي واقترح تحسينات','الكود بلغة JavaScript لمشروع صغير'],['أنشئ صفحة شخصية بـ HTML وCSS','الصفحة تحتوي اسمًا ونبذة ومهارات وروابط تواصل']];
+function tpl(){const t=TP[+$('#tp').value];$('#ta').value=t[0];$('#cx').value=t[1]}tpl();$('#tp').onchange=tpl;
+let PR='';
+$('#gp').onclick=()=>{const a=[$('#ro').value,$('#ta').value,$('#cx').value,$('#fm').value];$('#pw').textContent='';$('#pm').textContent='';
+ if(BAD.test(a.join(' '))){$('#pw').textContent='تم حظر المحتوى: لا يمكن صياغة أوامر ضارة أو غير لائقة.';$('#po').textContent='—';PR='';return}
+ PR=`أنت ${a[0]}.\nالمهمة: ${a[1]}.\nالسياق: ${a[2]}.\nالصيغة المطلوبة: ${a[3]}.\nالتزم بالدقة والوضوح، واسأل عند غموض المطلوب.`;$('#po').textContent=PR};
+$('#cp').onclick=async()=>{if(PR)$('#pm').textContent=await copy(PR)?'تم النسخ.':'تعذّر النسخ.'};
+$('#sh').onclick=async()=>{if(!PR)return;try{if(navigator.share){await navigator.share({title:'أمر جاهز',text:PR});return}}catch(e){if(e&&e.name==='AbortError')return}$('#pm').textContent=await copy(PR)?'المشاركة غير متاحة هنا، تم نسخ النص بدلًا منها.':'تعذّرت المشاركة.'};
+</script></body></html>
